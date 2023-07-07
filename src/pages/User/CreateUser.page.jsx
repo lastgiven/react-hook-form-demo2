@@ -29,7 +29,7 @@ const CreateUser = () => {
   });
 
   useEffect(() => {
-    setPageTitle('Create User');
+    setPageTitle('Create User 123123');
   });
 
   const submit = (values) => {
