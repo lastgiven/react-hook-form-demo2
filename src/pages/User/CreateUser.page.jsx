@@ -21,15 +21,15 @@ const CreateUser = () => {
 
   const methods = useForm({
     defaultValues: {
-      firstName: '',
-      lastName: '',
+      firstName: 'Werner',
+      lastName: 'Potgieter',
       email: '',
       status: '',
     },
   });
 
   useEffect(() => {
-    setPageTitle('Create User 123123');
+    setPageTitle('Create User');
   });
 
   const submit = (values) => {
