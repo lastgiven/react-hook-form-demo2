@@ -2,6 +2,7 @@ import { Col, Container, Row } from 'components/Grid/Grid.component';
 import { useContext, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { APP_CONTEXT } from 'utils/context';
+import { FormProvider, useForm } from 'react-hook-form';
 import Form from './User.form';
 
 const Pre = styled.div`
@@ -14,9 +15,19 @@ const Pre = styled.div`
   }
 `;
 
-const Form1 = () => {
+const CreateUser = () => {
   const { setPageTitle } = useContext(APP_CONTEXT);
   const [data, setData] = useState({});
+
+  const methods = useForm({
+    defaultValues: {
+      firstName: '',
+      lastName: '',
+      email: '',
+      status: '',
+    },
+  });
+
   useEffect(() => {
     setPageTitle('Create User');
   });
@@ -30,7 +41,9 @@ const Form1 = () => {
       <Row>
         <Col sm={6}>
           <h2 style={{ marginTop: 0, color: 'white' }}>Simplistic form demo</h2>
-          <Form submit={submit} />
+          <FormProvider {...methods}>
+            <Form submit={submit} />
+          </FormProvider>
         </Col>
         <Col sm={6}>
           <Pre>
@@ -43,4 +56,4 @@ const Form1 = () => {
   );
 };
 
-export default Form1;
+export default CreateUser;

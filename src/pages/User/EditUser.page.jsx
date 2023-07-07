@@ -2,7 +2,20 @@ import { Col, Container, Row } from 'components/Grid/Grid.component';
 import { useContext, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { APP_CONTEXT } from 'utils/context';
+import { FormProvider, useForm } from 'react-hook-form';
 import Form from './User.form';
+
+const getUser = () =>
+  new Promise((resolve) => {
+    setTimeout(() => {
+      resolve({
+        firstName: 'Werner',
+        lastName: 'Potgieter',
+        email: 'werner@openvantage.co.za',
+        status: 'no',
+      });
+    }, 20000);
+  });
 
 const Pre = styled.div`
   color: white;
@@ -14,9 +27,14 @@ const Pre = styled.div`
   }
 `;
 
-const Form1 = () => {
+const CreateUser = () => {
   const { setPageTitle } = useContext(APP_CONTEXT);
   const [data, setData] = useState({});
+
+  const methods = useForm({
+    defaultValues: async () => getUser(),
+  });
+
   useEffect(() => {
     setPageTitle('Edit User');
   });
@@ -30,7 +48,9 @@ const Form1 = () => {
       <Row>
         <Col sm={6}>
           <h2 style={{ marginTop: 0, color: 'white' }}>Simplistic form demo</h2>
-          <Form submit={submit} />
+          <FormProvider {...methods}>
+            <Form submit={submit} />
+          </FormProvider>
         </Col>
         <Col sm={6}>
           <Pre>
@@ -43,4 +63,4 @@ const Form1 = () => {
   );
 };
 
-export default Form1;
+export default CreateUser;
