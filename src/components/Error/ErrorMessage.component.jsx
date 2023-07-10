@@ -14,7 +14,7 @@ const getError = (errors, name) => {
   return obj;
 };
 
-const ErrorMessage = ({ errors, name, message: msg }) => {
+const ErrorMessage = ({ errors, name }) => {
   const { message } = getError(errors, name) ?? {};
   if (!message) {
     return null;
