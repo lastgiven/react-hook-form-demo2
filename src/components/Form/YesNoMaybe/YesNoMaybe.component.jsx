@@ -1,22 +1,7 @@
 import PropTypes from 'prop-types';
 import ErrorMessage from 'components/Error/ErrorMessage.component';
 import { Controller, useFormContext } from 'react-hook-form';
-import styled from 'styled-components';
-
-const Option = styled.div`
-  width: auto;
-  height: 25px;
-  border: 1px solid ${(props) => (props.active ? 'green' : 'grey')};
-  border-radius: 5px;
-  padding: 0 15px;
-  margin: 0 5px;
-  display: inline-block;
-`;
-
-const Container = styled.div`
-  width: auto;
-  padding: 15px;
-`;
+import S from './YesNoMaybe.style';
 
 const YesNoMaybe = ({ name, registerOptions }) => {
   const {
@@ -29,20 +14,20 @@ const YesNoMaybe = ({ name, registerOptions }) => {
       name={name}
       rules={registerOptions}
       render={({ field: { onChange, value } }) => (
-        <Container>
-          <Container>
-            <Option active={value === 'yes'} onClick={() => onChange('yes')}>
+        <S.Container>
+          <S.Container>
+            <S.Option active={value === 'yes'} onClick={() => onChange('yes')}>
               yes
-            </Option>
-            <Option active={value === 'maybe'} onClick={() => onChange('maybe')}>
+            </S.Option>
+            <S.Option active={value === 'maybe'} onClick={() => onChange('maybe')}>
               maybe
-            </Option>
-            <Option active={value === 'no'} onClick={() => onChange('no')}>
+            </S.Option>
+            <S.Option active={value === 'no'} onClick={() => onChange('no')}>
               no
-            </Option>
-          </Container>
+            </S.Option>
+          </S.Container>
           <ErrorMessage errors={errors} name={name} />
-        </Container>
+        </S.Container>
       )}
     />
   );

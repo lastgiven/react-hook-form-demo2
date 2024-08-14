@@ -14,7 +14,7 @@ const getUser = () =>
         email: 'werner@openvantage.co.za',
         status: 'no',
       });
-    }, 20000);
+    }, 5000);
   });
 
 const Pre = styled.div`
@@ -32,7 +32,10 @@ const CreateUser = () => {
   const [data, setData] = useState({});
 
   const methods = useForm({
-    defaultValues: async () => getUser(),
+    defaultValues: async () => {
+      const user = await getUser();
+      return user;
+    },
   });
 
   useEffect(() => {
@@ -43,11 +46,15 @@ const CreateUser = () => {
     setData(values);
   };
 
+  const {
+    formState: { isLoading },
+  } = methods;
+
   return (
     <Container>
       <Row>
         <Col sm={6}>
-          <h2 style={{ marginTop: 0, color: 'white' }}>Simplistic form demo</h2>
+          <h2 style={{ marginTop: 0, color: 'white' }}>Simplistic form demo {isLoading && 'Loading'}</h2>
           <FormProvider {...methods}>
             <Form submit={submit} />
           </FormProvider>
